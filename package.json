@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "purge": "rm -rf node_modules/ && rm -rf ios/Pods/ && rm -rf ios/build/  && rm -rf android/build/ && yarn install && cd ios/ && pod install"
   },
   "dependencies": {
     "react": "16.5.0",

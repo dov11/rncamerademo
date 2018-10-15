@@ -7,34 +7,62 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Dimensions} from 'react-native';
+import {Platform, StyleSheet, Text, View, Dimensions, TouchableOpacity} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
 const { width } = Dimensions.get('window');
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 type Props = {};
-export default class App extends Component<Props> {
+
+type State = {
+  isFrontFacing: boolean,
+  canDetectText: boolean,
+  canDetectFaces: boolean,
+}
+
+export default class App extends Component<Props, State> {
+  state = {
+    isFrontFacing: true,
+    canDetectText: false,
+    canDetectFaces: false,
+  }
+
+  facesDetected = face => {
+    console.log(face);
+  };
+
+  textRecognized = text => {
+    console.log(text);
+  };
+
+  toggle = value => this.setState((prevState) => ({[value]: !prevState[value]}));
+
   render() {
+    const { isFrontFacing, canDetectFaces, canDetectText } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
         <RNCamera
             ref={ref => {
               this.camera = ref;
             }}
-            style={{ flex: 1, width }}
-            type={RNCamera.Constants.Type.back}
-            // onTextRecognized={startedSearch ? null : this.textRecognized}
-        />
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+            style={{ flex: 1, width, justifyContent: 'flex-end', }}
+            type={isFrontFacing ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
+            // faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all}
+            onFacesDetected={canDetectFaces ? this.facesDetected : null}
+            onTextRecognized={canDetectText ? this.textRecognized : null}
+        >
+        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => this.toggle('isFrontFacing')} style={styles.capture}>
+            <Text style={{ fontSize: 14 }}> Flip Camera </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.toggle('canDetectFaces')} style={styles.capture}>
+            <Text style={{ fontSize: 14 }}>{!canDetectFaces ? 'Detect Faces' : 'Detecting Faces'}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.toggle('canDetectText')} style={styles.capture}>
+            <Text style={{ fontSize: 14 }}>{!canDetectText ? 'Detect Text' : 'Detecting Text'}</Text>
+          </TouchableOpacity>
+        </View>
+        </RNCamera>
       </View>
     );
   }
@@ -56,5 +84,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 15,
+    // paddingHorizontal: 20,
+    alignSelf: 'center',
+    // margin: 20,
   },
 });
