@@ -1,5 +1,5 @@
 {
-  "name": "RNcamerademo",
+  "name": "rncamerademo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,12 +10,21 @@
   "dependencies": {
     "react": "16.5.0",
     "react-native": "0.57.0",
-    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera"
+    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
+    "react-native-svg": "^7.1.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babel-jest": "23.6.0",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.83.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",
+    "prettier": "^1.14.3",
     "react-test-renderer": "16.5.0"
   },
   "jest": {

@@ -1,0 +1,56 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "plugins": ["prettier", "flowtype", "react"],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "rules": {
+    "react/no-array-index-key": "error",
+    "react/jsx-pascal-case": ["error", { "allowAllCaps": true, "ignore": [] }],
+    "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
+    "react/prefer-stateless-function": ["error", { "ignorePureComponents": true }],
+    "react/sort-comp": "error",
+    "react/no-this-in-sfc": "error",
+    "react/no-redundant-should-component-update": "error",
+    "react/no-access-state-in-setstate": "error",
+    "react/no-unsafe": "error",
+    "react/no-did-update-set-state": "error",
+    "react/no-did-mount-set-state": "error",
+    "react/no-unused-state": "error",
+    "react/no-string-refs": "error",
+    "react/no-typos": "error",
+    "react/jsx-no-bind": "error",
+    "flowtype/space-after-type-colon": ["error", "always", { "allowLineBreak": true }],
+    "no-useless-return": "error",
+    "prefer-destructuring": "error",
+    "prefer-const": "error",
+    "prefer-object-spread": "error",
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+    "no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }
+    ],
+    "no-dupe-class-members": "error",
+    "object-shorthand": ["error", "always", { "ignoreConstructors": false, "avoidQuotes": true }],
+    "prefer-spread": "error",
+    "no-console": "warn",
+    "consistent-return": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-const-assign": "error"
+  },
+  "globals": {
+    "__DEV__": true
+  }
+}
